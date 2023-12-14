@@ -7,12 +7,19 @@ const LanguageSwitcher = () => {
   const languages = {
     english: 'Hello World!',
     polish: 'Witaj Świecie!',
+    french: 'Bonjour le Monde!',
+    german: 'Hallo Welt!',
+    spanish: '¡Hola Mundo!',
+    italian: 'Ciao Mondo!',
+    russian: 'Привет, мир!',
   };
 
   const toggleLanguage = () => {
-    setCurrentLanguage(prevLanguage =>
-      prevLanguage === 'english' ? 'polish' : 'english',
-    );
+    const languageKeys = Object.keys(languages);
+    const currentIndex = languageKeys.indexOf(currentLanguage);
+    const nextIndex = (currentIndex + 1) % languageKeys.length;
+    const nextLanguage = languageKeys[nextIndex];
+    setCurrentLanguage(nextLanguage);
   };
 
   return (
