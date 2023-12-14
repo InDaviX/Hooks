@@ -1,13 +1,46 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
-const App = () => {
-  const [text, setText] = useState('Cheloł łord!');
+const LanguageSwitcher = () => {
+  const [currentLanguage, setCurrentLanguage] = useState('english');
+
+  const languages = {
+    english: 'Hello World!',
+    polish: 'Witaj Świecie!',
+  };
+
+  const toggleLanguage = () => {
+    setCurrentLanguage(prevLanguage =>
+      prevLanguage === 'english' ? 'polish' : 'english',
+    );
+  };
+
   return (
-    <SafeAreaView>
-      <Text onPress={() => setText('Hello, World!')}>{text}</Text>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Text style={styles.text}>{languages[currentLanguage]}</Text>
+      <Button
+        title="Toggle Language"
+        onPress={toggleLanguage}
+        style={styles.button}
+      />
+    </View>
   );
 };
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 16,
+  },
+  button: {
+    width: '50%',
+  },
+});
+
+export default LanguageSwitcher;
