@@ -1,5 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Text, Button, View} from 'react-native';
+import {ThemeContext} from './contexts/ThemeContext';
+import HomeScreen from './components/HomeScreen/HomeScreen';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -7,14 +9,16 @@ const App = () => {
     setIsDarkMode(!isDarkMode);
   };
   return (
-    <SafeAreaView>
-      <View style={{backgroundColor: isDarkMode ? '#222222' : '#aaaaaa'}}>
-        <Text style={{color: isDarkMode ? '#FFFFFF' : '#000000'}}>
-          Hello World!
-        </Text>
-        <Button title={'Switch Theme'} onPress={toggleDarkMode} />
-      </View>
-    </SafeAreaView>
+    <ThemeContext.Provider value={isDarkMode}>
+      <SafeAreaView>
+        <HomeScreen />
+        <Button
+          title={'Switch Theme'}
+          onPress={toggleDarkMode}
+          style={{width: '50%'}}
+        />
+      </SafeAreaView>
+    </ThemeContext.Provider>
   );
 };
 
